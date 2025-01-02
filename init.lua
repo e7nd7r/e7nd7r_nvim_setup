@@ -144,6 +144,13 @@ vim.opt.softtabstop = 4
 -- GitSigns
 require('gitsigns').setup()
 
+vim.api.nvim_set_keymap('n', '<leader>hl', ':Gitsigns preview_hunk<CR>', { noremap = true, silent = true })
+vim.api.nvim_set_keymap('n', '<leader>hk', ':Gitsigns prev_hunk<CR>', { noremap = true, silent = true })
+vim.api.nvim_set_keymap('n', '<leader>hj', ':Gitsigns next_hunk<CR>', { noremap = true, silent = true })
+vim.api.nvim_set_keymap('n', '<leader>hs', ':Gitsigns stage_hunk<CR>', { noremap = true, silent = true })
+vim.api.nvim_set_keymap('n', '<leader>hu', ':Gitsigns undo_stage_hunk<CR>', { noremap = true, silent = true })
+vim.api.nvim_set_keymap('n', '<leader>hr', ':Gitsigns reset_hunk<CR>', { noremap = true, silent = true })
+
 require('nvim-tree').setup({
     sync_root_with_cwd = true,
     update_focused_file = {
