@@ -144,9 +144,9 @@ vim.opt.softtabstop = 4
 -- GitSigns
 require('gitsigns').setup()
 
-vim.api.nvim_set_keymap('n', '<leader>hl', ':Gitsigns preview_hunk<CR>', { noremap = true, silent = true })
-vim.api.nvim_set_keymap('n', '<leader>hk', ':Gitsigns prev_hunk<CR>', { noremap = true, silent = true })
-vim.api.nvim_set_keymap('n', '<leader>hj', ':Gitsigns next_hunk<CR>', { noremap = true, silent = true })
+vim.api.nvim_set_keymap('n', '<leader>hp', ':Gitsigns preview_hunk<CR>', { noremap = true, silent = true })
+vim.api.nvim_set_keymap('n', '[c', ':Gitsigns prev_hunk<CR>', { noremap = true, silent = true })
+vim.api.nvim_set_keymap('n', ']c', ':Gitsigns next_hunk<CR>', { noremap = true, silent = true })
 vim.api.nvim_set_keymap('n', '<leader>hs', ':Gitsigns stage_hunk<CR>', { noremap = true, silent = true })
 vim.api.nvim_set_keymap('n', '<leader>hu', ':Gitsigns undo_stage_hunk<CR>', { noremap = true, silent = true })
 vim.api.nvim_set_keymap('n', '<leader>hr', ':Gitsigns reset_hunk<CR>', { noremap = true, silent = true })
@@ -159,6 +159,18 @@ require('nvim-tree').setup({
     },
     -- Optional: Respect per-buffer local directories.
     respect_buf_cwd = true,
+    git = {
+        enable = true,
+        ignore = true,
+    },
+    renderer = {
+        highlight_git = true,
+        icons = {
+            show = {
+                git = true,
+            }
+        }
+    }
 })
 
 vim.api.nvim_set_keymap('n', '<leader>tt', ':NvimTreeToggle<CR>', { noremap = true, silent = true })
