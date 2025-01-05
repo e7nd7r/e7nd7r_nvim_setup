@@ -4,8 +4,9 @@ return {
         config = function()
         end
     },
-    { -- Adds git related signs to the gutter, as well as utilities for managing changes
-       'lewis6991/gitsigns.nvim',
+    {
+        -- Adds git related signs to the gutter, as well as utilities for managing changes
+        'lewis6991/gitsigns.nvim',
         config = function ()
             vim.keymap.set('n', '<leader>hp', ':Gitsigns preview_hunk<CR>', { noremap = true, silent = true })
             vim.keymap.set('n', '[c', ':Gitsigns prev_hunk<CR>', { noremap = true, silent = true })
@@ -15,13 +16,13 @@ return {
             vim.keymap.set('n', '<leader>hr', ':Gitsigns reset_hunk<CR>', { noremap = true, silent = true })
         end,
         opts = {
-          signs = {
-            add = { text = '+' },
-            change = { text = '~' },
-            delete = { text = '_' },
-            topdelete = { text = '‾' },
-            changedelete = { text = '~' },
-          },
+            signs = {
+                add = { text = '+' },
+                change = { text = '~' },
+                delete = { text = '_' },
+                topdelete = { text = '‾' },
+                changedelete = { text = '~' },
+            },
         },
     },
 }

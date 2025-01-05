@@ -66,11 +66,19 @@ vim.api.nvim_set_keymap('v', '<Down>', '', { noremap = true, silent = true })
 vim.api.nvim_set_keymap('v', '<Left>', '', { noremap = true, silent = true })
 vim.api.nvim_set_keymap('v', '<Right>', '', { noremap = true, silent = true })
 
-vim.opt.tabstop = 4 
+vim.opt.tabstop = 4
 vim.opt.shiftwidth = 4
 vim.opt.expandtab = true
 vim.opt.softtabstop = 4
 
+-- Set default fold method to 'indent'
+vim.opt.foldmethod = "indent"
+
+-- Ensure all folds are open by default
+vim.opt.foldlevel = 99
+
+vim.keymap.set('v', '>', '>gv')
+vim.keymap.set('v', '<', '<gv')
 
 -- Highlight when yanking (copying) text
 --  Try it with `yap` in normal mode
@@ -95,4 +103,3 @@ if not (vim.uv or vim.loop).fs_stat(lazypath) then
 end ---@diagnostic disable-next-line: undefined-field
 
 vim.opt.rtp:prepend(lazypath)
-

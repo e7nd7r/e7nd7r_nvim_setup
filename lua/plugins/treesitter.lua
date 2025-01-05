@@ -15,6 +15,16 @@ return { -- Highlight, edit, and navigate code
         additional_vim_regex_highlighting = { 'ruby' },
       },
       indent = { enable = true, disable = { 'ruby' } },
+      incremental_selection = {
+          enable = true,
+          keymaps = {
+              init_selection = "gnn", -- set to `false` to disable one of the mappings
+              node_incremental = "grn",
+              scope_incremental = "gmm",
+              node_decremental = "grm",
+              -- ["af"] = "@function.outer",
+          },
+      },
     },
     -- There are additional nvim-treesitter modules that you can use to interact
     -- with nvim-treesitter. You should go explore a few and see what interests you:
