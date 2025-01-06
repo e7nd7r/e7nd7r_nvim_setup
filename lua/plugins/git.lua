@@ -8,6 +8,8 @@ return {
         -- Adds git related signs to the gutter, as well as utilities for managing changes
         'lewis6991/gitsigns.nvim',
         config = function ()
+            require('gitsigns').setup()
+
             vim.keymap.set('n', '<leader>hp', ':Gitsigns preview_hunk<CR>', { noremap = true, silent = true })
             vim.keymap.set('n', '[c', ':Gitsigns prev_hunk<CR>', { noremap = true, silent = true })
             vim.keymap.set('n', ']c', ':Gitsigns next_hunk<CR>', { noremap = true, silent = true })

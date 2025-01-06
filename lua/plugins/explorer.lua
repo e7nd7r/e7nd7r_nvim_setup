@@ -6,6 +6,7 @@ return {
     "nvim-tree/nvim-web-devicons",
   },
   config = function()
+
     require("nvim-tree").setup {
         sync_root_with_cwd = true,
         update_focused_file = {
@@ -27,6 +28,16 @@ return {
             }
         }
     }
+
+    local api = require("nvim-tree.api")
+
+    api.events.subscribe("TreeOpen", function ()
+       vim.g.tree_opened = true
+    end)
+
+    api.events.subscribe("TreeClose", function ()
+       vim.g.tree_opened = false
+    end)
 
     -- Keymaps
     vim.api.nvim_set_keymap('n', '<leader>tt', ':NvimTreeToggle<CR>', { noremap = true, silent = true })
