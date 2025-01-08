@@ -60,11 +60,7 @@ local function is_test_file2(file_path)
     local base_name = file_path:match("^.+/(.+)$")
 
     for _, pattern in ipairs(test_patterns) do
-        -- vim.notify("checking pattern:" .. pattern)
-
         if is_match(base_name, pattern) then
-            -- TODO: Investigatin async issue.
-            -- https://github.com/nvim-neotest/neotest/issues/444
             return true
         end
     end
