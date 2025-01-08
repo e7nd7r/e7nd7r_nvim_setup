@@ -1,35 +1,43 @@
-local function get_pytest_config()
-    local toml = require("toml")
+local toml = require("toml")
+local nio = require("nio")
 
-    local file, err = io.open(vim.fn.getcwd() .. '/' .. 'pyproject.toml')
+local cached_config = nil
 
-    -- vim.notify(file and 'pyproject found' or 'pyproject not found')
+local function is_match(base_name, pattern)
+    local lua_pattern = pattern:gsub("%%", "%%%%"):gsub("%*", ".*"):gsub("%?", ".") -- Convert glob to Lua pattern
+
+    return base_name:match(lua_pattern) ~= nil
+end
+
+local function get_config()
+    if cached_config then
+        return cached_config
+    end
+
+    local file, err = nio.file.open(vim.fn.getcwd() .. '/' .. 'pyproject.toml')
 
     if not file or err then
         return nil
     end
 
-    -- Parse pyproject.toml
-    local file_content = file:read("*all")
+    local content = file.read(nil, 0)
 
-    -- if file_content then
-        -- vim.notify("content was load")
-    -- end
+    cached_config = toml.decode(content)
 
-    local config = toml.decode(file_content)
-    if not config then
-        return nil
-    end
+    return cached_config
+end
 
-    -- vim.notify('config loaded')
+local function get_pytest_config()
+    local config = get_config()
 
-    if config.tool and config.tool.pytest and config.tool.pytest.ini_options then
+    if config and config.tool and config.tool.pytest and config.tool.pytest.ini_options then
         return config.tool.pytest.ini_options
     end
 
     return nil
 end
 
+-- @async
 local function is_test_file2(file_path)
     if not vim.endswith(file_path, ".py") then
         return false
@@ -40,10 +48,6 @@ local function is_test_file2(file_path)
 
     -- If pytest configuration is found, override test_patterns
     if pytest_config and pytest_config.python_files then
-
-        -- vim.notify('loading patterns')
-        -- vim.notify('pyproject python_files' .. pytest_config.python_files)
-
         -- Handle both single string and list of patterns
         if type(pytest_config.python_files) == "string" then
             test_patterns = { pytest_config.python_files }
@@ -55,25 +59,17 @@ local function is_test_file2(file_path)
     -- Check if the file matches any test pattern
     local base_name = file_path:match("^.+/(.+)$")
 
-    -- vim.notify("Base name:" .. base_name)
-
     for _, pattern in ipairs(test_patterns) do
         -- vim.notify("checking pattern:" .. pattern)
 
-        local a = vim.fn.match(base_name, vim.fn.glob2regpat(pattern))
-
-        -- vim.notify("match result:" .. tostring(a))
-
-        if vim.fn.match(base_name, vim.fn.glob2regpat(pattern)) ~= -1 then
+        if is_match(base_name, pattern) then
             -- TODO: Investigatin async issue.
             -- https://github.com/nvim-neotest/neotest/issues/444
             return true
         end
     end
 
-    print("end. ... ")
-
-    return true
+    return false
 end
 
 return {
@@ -98,8 +94,8 @@ return {
                     dap = { justMyCode = false },
                     args = { "--log-level", "DEBUG" },
                     is_test_file = function (test_file)
-                       local a = is_test_file2(test_file)
-                       return a
+                        nio.scheduler()
+                        return is_test_file2(test_file)
                     end
                 },
                 require("neotest-plenary"),
