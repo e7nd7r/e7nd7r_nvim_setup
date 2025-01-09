@@ -2,7 +2,7 @@
 
 This is my basic neovim configuration.
 
-# Tacled pitfalls
+# Tackled challenges
 
 ## Including luarocks modules
 
