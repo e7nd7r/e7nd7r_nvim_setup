@@ -12,15 +12,21 @@ return {
         }
 
         -- Go to the next tab
-        vim.api.nvim_set_keymap('n', '<Tab>', ':BufferLineCycleNext<CR>', { noremap = true, silent = true })
+        vim.keymap.set('n', '<Tab>', ':BufferLineCycleNext<CR>', { noremap = true, silent = true })
         -- Go to the previous tab 
-        vim.api.nvim_set_keymap('n', '<S-Tab>', ':BufferLineCyclePrev<CR>', { noremap = true, silent = true })
+        vim.keymap.set('n', '<S-Tab>', ':BufferLineCyclePrev<CR>', { noremap = true, silent = true })
         -- Go to the next tab.
-        vim.api.nvim_set_keymap('n', '<leader>bn', ':BufferLineMoveNext<CR>', { noremap = true, silent = true })
+        vim.keymap.set('n', '<leader>bn', ':BufferLineMoveNext<CR>', { noremap = true, silent = true })
         -- Go to previous tab.
-        vim.api.nvim_set_keymap('n', '<leader>bp', ':BufferLineMovePrev<CR>', { noremap = true, silent = true })
+        vim.keymap.set('n', '<leader>bp', ':BufferLineMovePrev<CR>', { noremap = true, silent = true })
         -- Pick a tab and close it.
-        vim.api.nvim_set_keymap('n', '<leader>bc', ':BufferLinePickClose<CR>', { noremap = true, silent = true })
+        vim.keymap.set('n', '<leader>bc', ':BufferLinePickClose<CR>', { noremap = true, silent = true })
+        -- Close the tabs at the right. 
+        vim.keymap.set('n', '<leader>bl', ':BufferLineCloseRight<CR>', { noremap = true, silent = true })
+        -- Close the tabs at the left.
+        vim.keymap.set('n', '<leader>bh', ':BufferLineCloseLeft<CR>', { noremap = true, silent = true })
+        -- Close others
+        vim.keymap.set('n', '<leader>bo', ':BufferLineCloseOthers<CR>', { noremap = true, silent = true })
     end
 }
 
