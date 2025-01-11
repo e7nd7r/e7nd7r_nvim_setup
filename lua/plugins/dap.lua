@@ -1,15 +1,3 @@
-local function close_nvim_tree()
-    if vim.g.tree_opened then
-        require("nvim-tree.api").tree.close()
-    end
-end
-
-local function open_nvim_tree()
-    if vim.g.tree_opene then
-        require("nvim-tree.api").tree.open()
-    end
-end
-
 function RunTestAtCursor()
     local dap = require('dap')
     local params = { textDocument = vim.lsp.util.make_text_document_params() }
@@ -119,7 +107,6 @@ return {
 
             -- Automatically open/close the UI when debugging starts/stops
             dap.listeners.after.event_initialized["dapui_config"] = function()
-                close_nvim_tree()
                 dapui.open()
             end
 
@@ -128,7 +115,6 @@ return {
             end
 
             dap.listeners.before.event_exited["dapui_config"] = function()
-                open_nvim_tree()
                 dapui.close()
             end
 

@@ -87,8 +87,8 @@ return {
             adapters = {
                 require("neotest-python") {
                     runner = "pytest",
-                    dap = { justMyCode = false },
-                    args = { "--log-level", "DEBUG" },
+                    dap = { justMyCode = true },
+                    args = { "-s", "--log-level", "DEBUG" },
                     is_test_file = function (test_file)
                         nio.scheduler()
                         return is_test_file2(test_file)
@@ -102,10 +102,19 @@ return {
         }
 
         vim.keymap.set('n', '<leader>td', function()
+
+            if not vim.g.is_test_output_open then
+                require('neotest').output_panel.open()
+                vim.g.is_test_output_open = true
+            end
+
             require('neotest').run.run({ strategy = "dap" }) -- Debug nearest test
         end, { desc = "Debug nearest test" })
 
         vim.keymap.set('n', '<leader>tf', function()
+            require('neotest').output_panel.open()
+            vim.g.is_test_output_open = true
+
             require('neotest').run.run(vim.fn.expand("%")) -- Run all tests in the current file
         end, { desc = "Run all tests in file" })
 
@@ -114,7 +123,14 @@ return {
         end, { desc = "Toggle test summary" })
 
         vim.keymap.set('n', '<leader>to', function()
-            require('neotest').output.open({ enter = true }) -- Open test output
-        end, { desc = "Open test output" })
-    end
+            if vim.g.is_test_output_open then
+                require('neotest').output_panel.close()
+                vim.g.is_test_output_open = false
+            else
+                require('neotest').output_panel.open()
+                vim.g.is_test_output_open = true
+
+            end
+        end, { desc = "Toggle [t]est [o]utput" })
+   end
 }

@@ -1,5 +1,17 @@
 return {
     {
+        {
+            "NeogitOrg/neogit",
+            dependencies = {
+                "nvim-lua/plenary.nvim",
+                "sindrets/diffview.nvim",
+                "echasnovski/mini.pick",
+            },
+            config = function ()
+            end
+        },
+    },
+    {
         'tpope/vim-fugitive',
         config = function()
         end

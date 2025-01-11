@@ -36,36 +36,6 @@ vim.opt.inccommand = 'split'
 vim.opt.cursorline = true
 
 vim.opt.scrolloff = 10
-
-vim.keymap.set('n', '<Esc>', '<cmd>nohlsearch<CR>')
-
-vim.keymap.set('n', '<leader>q', vim.diagnostic.setloclist, { desc = 'Open diagnostic [Q]uickfix list' })
-
-vim.keymap.set('t', '<Esc><Esc>', '<C-\\><C-n>', { desc = 'Exit terminal mode' })
-
-vim.keymap.set('n', '<C-h>', '<C-w><C-h>', { desc = 'Move focus to the left window' })
-vim.keymap.set('n', '<C-l>', '<C-w><C-l>', { desc = 'Move focus to the right window' })
-vim.keymap.set('n', '<C-j>', '<C-w><C-j>', { desc = 'Move focus to the lower window' })
-vim.keymap.set('n', '<C-k>', '<C-w><C-k>', { desc = 'Move focus to the upper window' })
-
--- Disable arrow keys in normal mode
-vim.api.nvim_set_keymap('n', '<Up>', '', { noremap = true, silent = true })
-vim.api.nvim_set_keymap('n', '<Down>', '', { noremap = true, silent = true })
-vim.api.nvim_set_keymap('n', '<Left>', '', { noremap = true, silent = true })
-vim.api.nvim_set_keymap('n', '<Right>', '', { noremap = true, silent = true })
-
--- Disable arrow keys in insert mode
-vim.api.nvim_set_keymap('i', '<Up>', '', { noremap = true, silent = true })
-vim.api.nvim_set_keymap('i', '<Down>', '', { noremap = true, silent = true })
-vim.api.nvim_set_keymap('i', '<Left>', '', { noremap = true, silent = true })
-vim.api.nvim_set_keymap('i', '<Right>', '', { noremap = true, silent = true })
-
--- Disable arrow keys in visual mode
-vim.api.nvim_set_keymap('v', '<Up>', '', { noremap = true, silent = true })
-vim.api.nvim_set_keymap('v', '<Down>', '', { noremap = true, silent = true })
-vim.api.nvim_set_keymap('v', '<Left>', '', { noremap = true, silent = true })
-vim.api.nvim_set_keymap('v', '<Right>', '', { noremap = true, silent = true })
-
 vim.opt.tabstop = 4
 vim.opt.shiftwidth = 4
 vim.opt.expandtab = true
@@ -76,9 +46,6 @@ vim.opt.foldmethod = "indent"
 
 -- Ensure all folds are open by default
 vim.opt.foldlevel = 99
-
-vim.keymap.set('v', '>', '>gv')
-vim.keymap.set('v', '<', '<gv')
 
 -- Highlight when yanking (copying) text
 --  Try it with `yap` in normal mode

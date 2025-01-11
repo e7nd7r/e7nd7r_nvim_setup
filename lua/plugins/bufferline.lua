@@ -23,3 +23,4 @@ return {
         vim.api.nvim_set_keymap('n', '<leader>bc', ':BufferLinePickClose<CR>', { noremap = true, silent = true })
     end
 }
+
