@@ -102,12 +102,6 @@ return {
         }
 
         vim.keymap.set('n', '<leader>td', function()
-
-            if not vim.g.is_test_output_open then
-                require('neotest').output_panel.open()
-                vim.g.is_test_output_open = true
-            end
-
             require('neotest').run.run({ strategy = "dap" }) -- Debug nearest test
         end, { desc = "Debug nearest test" })
 
