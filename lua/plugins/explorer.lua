@@ -11,7 +11,7 @@ return {
             sync_root_with_cwd = true,
             update_focused_file = {
                 enable = true,
-                update_cwd = true,
+                update_cwd = false,
             },
             -- Optional: Respect per-buffer local directories.
             respect_buf_cwd = true,

@@ -8,7 +8,7 @@ vim.api.nvim_create_autocmd("TextYankPost", {
         end
 
         local snip  = ls.parser.parse_snippet({ trig = "regsnip" }, vim.fn.getreg('s'))
-
+        ls.cleanup()
         ls.add_snippets('all', { snip })
     end
 })
