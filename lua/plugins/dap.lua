@@ -62,7 +62,7 @@ function RunTestAtCursor()
             type = 'python',
             request = 'launch',
             program = os.getenv('VIRTUAL_ENV') and os.getenv('VIRTUAL_ENV') .. '/bin/pytest' or vim.fn.exepath('pytest'),
-            args = { '-x', '-v', '--durations=10', '--maxfail=1', "${file}::" .. symbol.name }, -- Pass file::test_name to pytest
+            args = { '-m', 'debugpy.adapter', '-x', '-v', '--durations=10', '--maxfail=1', "${file}::" .. symbol.name }, -- Pass file::test_name to pytest
             console = 'integratedTerminal',
         })
     end)
@@ -110,15 +110,15 @@ return {
                 dapui.open()
             end
 
-            dap.listeners.before.event_terminated["dapui_config"] = function()
-                dapui.close()
-            end
+            -- dap.listeners.before.event_terminated["dapui_config"] = function()
+            --     dapui.close()
+            -- end
 
-            dap.listeners.before.event_exited["dapui_config"] = function()
-                dapui.close()
-            end
+            -- dap.listeners.before.event_exited["dapui_config"] = function()
+            --     dapui.close()
+            -- end
 
-            -- dap.listeners.after.event_terminated["close_non_project_buffers"] = function()
+            -- -- dap.listeners.after.event_terminated["close_non_project_buffers"] = function()
             --     local project_dir = vim.fn.getcwd() -- Get the current working directory
             --     for _, buf in ipairs(vim.api.nvim_list_bufs()) do
             --         local buf_name = vim.api.nvim_buf_get_name(buf)
@@ -137,7 +137,7 @@ return {
             vim.keymap.set('n', '<Leader>lp', '<Cmd>lua require("dap").set_breakpoint(nil, nil, vim.fn.input("Log point message: "))<CR>', { noremap = true, silent = true })
             vim.keymap.set('n', '<Leader>dr', '<Cmd>lua require("dap").repl.open()<CR>', { noremap = true, silent = true })
             vim.keymap.set('n', '<Leader>dl', '<Cmd>lua require("dap").run_last()<CR>', { noremap = true, silent = true })
-            vim.keymap.set('n', '<Leader>dc', '<Cmd>lua RunTestAtCursor()<CR>', { noremap = true, silent = true })
+            -- vim.keymap.set('n', '<Leader>dc', '<Cmd>lua RunTestAtCursor()<CR>', { noremap = true, silent = true })
             vim.keymap.set('n', '<Leader>dt', '<Cmd>lua require("dap").terminate()<CR>',{ noremap = true, silent = true })
         end
     },
