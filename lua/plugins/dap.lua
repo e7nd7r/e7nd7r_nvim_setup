@@ -110,13 +110,13 @@ return {
                 dapui.open()
             end
 
-            -- dap.listeners.before.event_terminated["dapui_config"] = function()
-            --     dapui.close()
-            -- end
+            dap.listeners.before.event_terminated["dapui_config"] = function()
+                dapui.close()
+            end
 
-            -- dap.listeners.before.event_exited["dapui_config"] = function()
-            --     dapui.close()
-            -- end
+            dap.listeners.before.event_exited["dapui_config"] = function()
+                dapui.close()
+            end
 
             -- -- dap.listeners.after.event_terminated["close_non_project_buffers"] = function()
             --     local project_dir = vim.fn.getcwd() -- Get the current working directory
