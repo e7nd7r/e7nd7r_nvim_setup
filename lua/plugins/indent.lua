@@ -4,7 +4,12 @@ return {
         main = "ibl",
         ---@module "ibl"
         ---@type ibl.config
-        opts = {},
+        opts = {
+            exclude = {
+                buftypes = { "nofile" },
+                filetypes = { "dashboard" },
+            },
+        },
     },
     {
         "kevinhwang91/nvim-ufo",

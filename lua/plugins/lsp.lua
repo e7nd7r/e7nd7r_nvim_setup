@@ -152,6 +152,9 @@
                 end,
             })
 
+            vim.keymap.set('n', '<leader>dn', vim.diagnostic.goto_next, { desc = '[D]iagnostic [N]ext' });
+            vim.keymap.set('n', '<leader>dp', vim.diagnostic.goto_prev, { desc = '[D]iagnostic [P]revious' });
+
             -- Change diagnostic symbols in the sign column (gutter)
             -- if vim.g.have_nerd_font then
             --   local signs = { ERROR = '', WARN = '', INFO = '', HINT = '' }
@@ -169,6 +172,11 @@
             local capabilities = vim.lsp.protocol.make_client_capabilities()
             capabilities = vim.tbl_deep_extend('force', capabilities, require('cmp_nvim_lsp').default_capabilities())
 
+
+            -- local on_attach = function(client)
+            --     -- require'completion'.on_attach(client)
+            -- end
+
             -- Enable the following language servers
             --  Feel free to add/remove any LSPs that you want here. They will automatically be installed.
             --
@@ -182,7 +190,27 @@
                 -- clangd = {},
                 gopls = {},
                 pyright = {},
-                rust_analyzer = {},
+                -- rust_analyzer = {
+                --     on_attach = on_attach,
+                --     settings = {
+                --         ["rust-analyzer"] = {
+                --             imports = {
+                --                 granularity = {
+                --                     group = "module",
+                --                 },
+                --                 prefix = "self",
+                --             },
+                --             cargo = {
+                --                 buildScripts = {
+                --                     enable = true,
+                --                 },
+                --             },
+                --             procMacro = {
+                --                 enable = true
+                --             },
+                --         }
+                --     }
+                -- },
                 codelldb = {},
                 -- ... etc. See `:help lspconfig-all` for a list of all the pre-configured LSPs
                 --
