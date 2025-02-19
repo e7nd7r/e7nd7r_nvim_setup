@@ -1,7 +1,10 @@
 return {
-    "yetone/avante.nvim",
+    dir = "~/repos/avante.nvim",
     event = "VeryLazy",
     lazy = false,
+    keys = {
+        { "<leader>al", "<cmd>AvanteAsk<cr>", desc = "Open [A]sk [L]LM" },
+    },
     version = false, -- Set this to "*" to always pull the latest release version, or set it to false to update to the latest code changes.
     opts = {
         -- add any opts here
@@ -14,6 +17,13 @@ return {
             temperature = 0, -- adjust if needed
             max_tokens = 4096,
             reasoning_effort = "high" -- only supported for "o" models
+        },
+        file_selector = {
+            ignore_patterns = {
+                "^.git",
+                "^.gitignore",
+                "\\v(^|/)target(/|$)",
+            }
         },
     },
     -- if you want to build from source then do `make BUILD_FROM_SOURCE=true`
