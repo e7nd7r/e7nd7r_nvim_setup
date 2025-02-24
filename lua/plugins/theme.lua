@@ -24,8 +24,10 @@ return {
         priority = 1000,
         config = function()
             require("catppuccin").setup({
-                theme = "latte",
+                flavour = "macchiato",
             })
+            -- Set the colorscheme using Lua
+            vim.cmd.colorscheme("catppuccin-macchiato")
         end,
     },
 }
