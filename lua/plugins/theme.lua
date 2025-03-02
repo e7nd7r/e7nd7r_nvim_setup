@@ -24,6 +24,8 @@ return {
         priority = 1000,
         config = function()
             require("catppuccin").setup({
+                transparent_background = true,
+                term_colors = true,
                 flavour = "macchiato",
             })
             -- Set the colorscheme using Lua
