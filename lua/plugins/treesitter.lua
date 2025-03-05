@@ -19,7 +19,8 @@ return { -- Highlight, edit, and navigate code
             'vimdoc',
             'go',
             'gosum',
-            'gomod'
+            'gomod',
+            'dart',
         },
         -- Autoinstall languages that are not installed
         auto_install = true,

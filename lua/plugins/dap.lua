@@ -139,6 +139,8 @@ return {
             vim.keymap.set('n', '<Leader>dl', '<Cmd>lua require("dap").run_last()<CR>', { noremap = true, silent = true })
             -- vim.keymap.set('n', '<Leader>dc', '<Cmd>lua RunTestAtCursor()<CR>', { noremap = true, silent = true })
             vim.keymap.set('n', '<Leader>dt', '<Cmd>lua require("dap").terminate()<CR>',{ noremap = true, silent = true })
+            vim.keymap.set('n', '<Leader>dc', dapui.close, { noremap = true, silent = true })
+            vim.keymap.set('n', '<Leader>do', dapui.open, { noremap = true, silent = true })
         end
     },
     {

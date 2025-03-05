@@ -1,4 +1,4 @@
-  return {
+return {
     {
         -- `lazydev` configures Lua LSP for your Neovim config, runtime and plugins
         -- used for completion, annotations and signatures of Neovim apis
@@ -28,6 +28,7 @@
             -- Allows extra capabilities provided by nvim-cmp
             'hrsh7th/cmp-nvim-lsp',
         },
+        -- This is a function that gets run when the plugin is loaded
         config = function()
             -- Brief aside: **What is LSP?**
             --
@@ -74,7 +75,7 @@
                     -- Jump to the definition of the word under your cursor.
                     --  This is where a variable was first declared, or where a function is defined, etc.
                     --  To jump back, press <C-t>.
-                    map('gd', require('telescope.builtin').lsp_definitions, '[G]oto [D]efinition')
+                    map('gd', vim.lsp.buf.definition, '[G]oto [D]efinition')
 
                     -- Find references for the word under your cursor.
                     map('gr', require('telescope.builtin').lsp_references, '[G]oto [R]eferences')
