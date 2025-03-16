@@ -14,7 +14,7 @@ return {}
 
 --         -- Go to the next tab
 --         vim.keymap.set('n', '<Tab>', ':BufferLineCycleNext<CR>', { noremap = true, silent = true })
---         -- Go to the previous tab 
+--         -- Go to the previous tab
 --         vim.keymap.set('n', '<S-Tab>', ':BufferLineCyclePrev<CR>', { noremap = true, silent = true })
 --         -- Go to the next tab.
 --         vim.keymap.set('n', '<leader>bn', ':BufferLineMoveNext<CR>', { noremap = true, silent = true })
@@ -22,7 +22,7 @@ return {}
 --         vim.keymap.set('n', '<leader>bp', ':BufferLineMovePrev<CR>', { noremap = true, silent = true })
 --         -- Pick a tab and close it.
 --         vim.keymap.set('n', '<leader>bc', ':BufferLinePickClose<CR>', { noremap = true, silent = true })
---         -- Close the tabs at the right. 
+--         -- Close the tabs at the right.
 --         vim.keymap.set('n', '<leader>bl', ':BufferLineCloseRight<CR>', { noremap = true, silent = true })
 --         -- Close the tabs at the left.
 --         vim.keymap.set('n', '<leader>bh', ':BufferLineCloseLeft<CR>', { noremap = true, silent = true })
@@ -30,4 +30,3 @@ return {}
 --         vim.keymap.set('n', '<leader>bo', ':BufferLineCloseOthers<CR>', { noremap = true, silent = true })
 --     end
 -- }
-

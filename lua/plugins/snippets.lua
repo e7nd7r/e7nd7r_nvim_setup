@@ -1,38 +1,43 @@
 vim.api.nvim_create_autocmd("TextYankPost", {
-    callback = function (_)
-        local ls = require("luasnip")
-        local reg_content = vim.fn.getreg('s')
+	callback = function(_)
+		local ls = require("luasnip")
+		local reg_content = vim.fn.getreg("s")
 
-        if reg_content == "" then
-            return
-        end
+		if reg_content == "" then
+			return
+		end
 
-        local snip  = ls.parser.parse_snippet({ trig = "regsnip" }, vim.fn.getreg('s'))
-        ls.cleanup()
-        ls.add_snippets('all', { snip })
-    end
+		local snip = ls.parser.parse_snippet({ trig = "regsnip" }, vim.fn.getreg("s"))
+		ls.cleanup()
+		ls.add_snippets("all", { snip })
+	end,
 })
 
 return {
-        {
-        "L3MON4D3/LuaSnip",
-        -- follow latest release.
-        version = "v2.*", -- Replace <CurrentMajor> by the latest released major (first number of latest release)
-        -- install jsregexp (optional!).
-        build = "make install_jsregexp",
-        config = function ()
-            local ls = require("luasnip")
+	{
+		"L3MON4D3/LuaSnip",
+		-- follow latest release.
+		version = "v2.*", -- Replace <CurrentMajor> by the latest released major (first number of latest release)
+		-- install jsregexp (optional!).
+		build = "make install_jsregexp",
+		config = function()
+			local ls = require("luasnip")
 
-            vim.keymap.set({"i"}, "<C-K>", function() ls.expand() end, {silent = true})
-            vim.keymap.set({"i", "s"}, "<C-L>", function() ls.jump( 1) end, {silent = true})
-            vim.keymap.set({"i", "s"}, "<C-J>", function() ls.jump(-1) end, {silent = true})
+			vim.keymap.set({ "i" }, "<C-K>", function()
+				ls.expand()
+			end, { silent = true })
+			vim.keymap.set({ "i", "s" }, "<C-L>", function()
+				ls.jump(1)
+			end, { silent = true })
+			vim.keymap.set({ "i", "s" }, "<C-J>", function()
+				ls.jump(-1)
+			end, { silent = true })
 
-            vim.keymap.set({"i", "s"}, "<C-E>", function()
-                if ls.choice_active() then
-                    ls.change_choice(1)
-                end
-            end, {silent = true})
-        end
-    }
+			vim.keymap.set({ "i", "s" }, "<C-E>", function()
+				if ls.choice_active() then
+					ls.change_choice(1)
+				end
+			end, { silent = true })
+		end,
+	},
 }
-
