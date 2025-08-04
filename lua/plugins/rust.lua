@@ -15,6 +15,13 @@ return {
 
 		vim.g.rustaceanvim = {
 			server = {
+				default_settings = {
+					["rust-analyzer"] = {
+						procMacro = {
+							enable = true,
+						},
+					},
+				},
 				cmd = function()
 					if mason_registry.is_installed("rust-analyzer") then
 						-- This may need to be tweaked depending on the operating system.
@@ -29,6 +36,21 @@ return {
 			},
 			dap = {
 				adapter = cfg.get_codelldb_adapter(codelldb_path, liblldb_path),
+				configurations = {
+					rust = {
+						{
+							name = "Launch Rust executable",
+							type = "codelldb",
+							request = "launch",
+							program = function()
+								return vim.fn.input("Path to executable: ", vim.fn.getcwd() .. "/target/debug/", "file")
+							end,
+							cwd = "${workspaceFolder}",
+							stopOnEntry = false,
+							runInTerminal = false,
+						},
+					},
+				},
 			},
 		}
 	end,
