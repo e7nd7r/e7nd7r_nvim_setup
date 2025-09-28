@@ -1,72 +1,72 @@
-local toml = require("toml")
-local nio = require("nio")
+-- local toml = require("toml")
+-- local nio = require("nio")
 
-local cached_config = nil
+-- local cached_config = nil
 
-local function is_match(base_name, pattern)
-	local lua_pattern = pattern:gsub("%%", "%%%%"):gsub("%*", ".*"):gsub("%?", ".") -- Convert glob to Lua pattern
+-- local function is_match(base_name, pattern)
+-- 	local lua_pattern = pattern:gsub("%%", "%%%%"):gsub("%*", ".*"):gsub("%?", ".") -- Convert glob to Lua pattern
 
-	return base_name:match(lua_pattern) ~= nil
-end
+-- 	return base_name:match(lua_pattern) ~= nil
+-- end
 
-local function get_config()
-	if cached_config then
-		return cached_config
-	end
+-- local function get_config()
+-- 	if cached_config then
+-- 		return cached_config
+-- 	end
 
-	local file, err = nio.file.open(vim.fn.getcwd() .. "/" .. "pyproject.toml")
+-- 	local file, err = nio.file.open(vim.fn.getcwd() .. "/" .. "pyproject.toml")
 
-	if not file or err then
-		return nil
-	end
+-- 	if not file or err then
+-- 		return nil
+-- 	end
 
-	local content = file.read(nil, 0)
+-- 	local content = file.read(nil, 0)
 
-	cached_config = toml.decode(content)
+-- 	cached_config = toml.decode(content)
 
-	return cached_config
-end
+-- 	return cached_config
+-- end
 
-local function get_pytest_config()
-	local config = get_config()
+-- local function get_pytest_config()
+-- 	local config = get_config()
 
-	if config and config.tool and config.tool.pytest and config.tool.pytest.ini_options then
-		return config.tool.pytest.ini_options
-	end
+-- 	if config and config.tool and config.tool.pytest and config.tool.pytest.ini_options then
+-- 		return config.tool.pytest.ini_options
+-- 	end
 
-	return nil
-end
+-- 	return nil
+-- end
 
--- @async
-local function is_test_file2(file_path)
-	if not vim.endswith(file_path, ".py") then
-		return false
-	end
+-- -- @async
+-- local function is_test_file2(file_path)
+-- 	if not vim.endswith(file_path, ".py") then
+-- 		return false
+-- 	end
 
-	local pytest_config = get_pytest_config()
-	local test_patterns = { "test_*.py", "*_test.py" } -- Default patterns
+-- 	local pytest_config = get_pytest_config()
+-- 	local test_patterns = { "test_*.py", "*_test.py" } -- Default patterns
 
-	-- If pytest configuration is found, override test_patterns
-	if pytest_config and pytest_config.python_files then
-		-- Handle both single string and list of patterns
-		if type(pytest_config.python_files) == "string" then
-			test_patterns = { pytest_config.python_files }
-		elseif type(pytest_config.python_files) == "table" then
-			test_patterns = pytest_config.python_files
-		end
-	end
+-- 	-- If pytest configuration is found, override test_patterns
+-- 	if pytest_config and pytest_config.python_files then
+-- 		-- Handle both single string and list of patterns
+-- 		if type(pytest_config.python_files) == "string" then
+-- 			test_patterns = { pytest_config.python_files }
+-- 		elseif type(pytest_config.python_files) == "table" then
+-- 			test_patterns = pytest_config.python_files
+-- 		end
+-- 	end
 
-	-- Check if the file matches any test pattern
-	local base_name = file_path:match("^.+/(.+)$")
+-- 	-- Check if the file matches any test pattern
+-- 	local base_name = file_path:match("^.+/(.+)$")
 
-	for _, pattern in ipairs(test_patterns) do
-		if is_match(base_name, pattern) then
-			return true
-		end
-	end
+-- 	for _, pattern in ipairs(test_patterns) do
+-- 		if is_match(base_name, pattern) then
+-- 			return true
+-- 		end
+-- 	end
 
-	return false
-end
+-- 	return false
+-- end
 
 return {
 	"nvim-neotest/neotest",
@@ -89,10 +89,10 @@ return {
 					runner = "pytest",
 					dap = { justMyCode = true },
 					args = { "-s", "--log-level", "DEBUG" },
-					is_test_file = function(test_file)
-						nio.scheduler()
-						return is_test_file2(test_file)
-					end,
+					-- is_test_file = function(test_file)
+					-- 	nio.scheduler()
+					-- 	return is_test_file2(test_file)
+					-- end,
 				}),
 				require("neotest-plenary"),
 				require("neotest-vim-test")({
