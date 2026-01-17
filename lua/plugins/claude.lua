@@ -12,6 +12,7 @@ return {
 		},
 		diff_opts = {
 			auto_close_on_accept = true,
+			open_in_new_tab = true,
 		},
 	},
 }

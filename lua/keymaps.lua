@@ -33,3 +33,8 @@ vim.keymap.set("v", "<", "<gv")
 vim.keymap.set("n", "<leader>wb", function()
 	vim.cmd("bo split")
 end, { desc = "Move [Window] to the [B]ottom" })
+
+-- Tab navigation
+vim.keymap.set("n", "<Tab>", "<cmd>tabnext<CR>", { desc = "Next tab" })
+vim.keymap.set("n", "<S-Tab>", "<cmd>tabprev<CR>", { desc = "Previous tab" })
+vim.keymap.set("n", "<leader>tc", "<cmd>tabclose<CR>", { desc = "[T]ab [C]lose" })
