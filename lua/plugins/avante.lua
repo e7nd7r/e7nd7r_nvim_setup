@@ -1,3 +1,7 @@
+-- Disabled in favor of Claude Code
+return {}
+
+--[[
 return {
 	dir = "~/repos/avante.nvim",
 	event = "VeryLazy",
@@ -67,3 +71,4 @@ return {
 		},
 	},
 }
+--]]

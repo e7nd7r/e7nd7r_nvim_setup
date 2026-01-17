@@ -1,3 +1,9 @@
+-- Disabled
+-- Note: github/copilot.vim is a Vimscript plugin, not copilot.lua
+-- Configuration is done via vim.g variables, not require("copilot")
+return {}
+
+--[[
 return {
 	"github/copilot.vim",
 	config = function()
@@ -16,5 +22,10 @@ return {
 		})
 
 		vim.g.copilot_no_tab_map = true
+		-- Disable copilot in all filetypes by default
+		vim.g.copilot_filetypes = {
+			["*"] = false,
+		}
 	end,
 }
+--]]

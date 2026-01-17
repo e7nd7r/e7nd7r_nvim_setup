@@ -10,7 +10,13 @@ return {
 					dart = { "dart_format" },
 					go = { "gofmt" },
 					rust = { "rustfmt" },
+					terraform = { "terraform" },
 					-- php = { "php-cs-fixer" },
+					sh = { "shfmt" },
+					bash = { "shfmt" },
+					zsh = { "shfmt" },
+					yml = { "yamlfmt" },
+					yaml = { "yamlfmt" },
 				},
 				format_on_save = {
 					timeout_ms = 60000,

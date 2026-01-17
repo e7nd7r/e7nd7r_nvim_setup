@@ -106,20 +106,59 @@ return {
 
 			local dapui = require("dapui")
 
-			dapui.setup()
+			dapui.setup({
+				layouts = {
+					-- Layout 1: Left sidebar with all debug elements stacked
+					{
+						elements = {
+							{ id = "scopes", size = 0.25 },
+							{ id = "stacks", size = 0.25 },
+							{ id = "breakpoints", size = 0.25 },
+							{ id = "watches", size = 0.25 },
+						},
+						position = "left",
+						size = 50,
+					},
+					-- Layout 2: Console (bottom)
+					{
+						elements = { { id = "console", size = 1 } },
+						position = "bottom",
+						size = 15,
+					},
+					-- Layout 3: REPL (bottom)
+					{
+						elements = { { id = "repl", size = 1 } },
+						position = "bottom",
+						size = 15,
+					},
+				},
+			})
+
+			-- Accordion helper for bottom panels: close all bottom, open specified
+			local function bottom_accordion(layout_index)
+				dapui.close({ layout = 2 }) -- Console
+				dapui.close({ layout = 3 }) -- REPL
+				dapui.toggle({ layout = layout_index })
+			end
+
+			-- Keymaps
+			vim.keymap.set("n", "<Leader>du", function() dapui.toggle({ layout = 1 }) end, { desc = "DAP: Toggle sidebar" })
+			vim.keymap.set("n", "<Leader>dc", function() bottom_accordion(2) end, { desc = "DAP: Console" })
+			vim.keymap.set("n", "<Leader>dr", function() bottom_accordion(3) end, { desc = "DAP: REPL" })
 
 			-- Automatically open/close the UI when debugging starts/stops
 			dap.listeners.after.event_initialized["dapui_config"] = function()
-				dapui.open()
+				dapui.open({ layout = 1 }) -- Left sidebar (all elements)
+				dapui.open({ layout = 2 }) -- Console
 			end
 
-			-- dap.listeners.before.event_terminated["dapui_config"] = function()
-			-- 	dapui.close()
-			-- end
+			dap.listeners.before.event_terminated["dapui_config"] = function()
+				dapui.close()
+			end
 
-			-- dap.listeners.before.event_exited["dapui_config"] = function()
-			-- 	dapui.close()
-			-- end
+			dap.listeners.before.event_exited["dapui_config"] = function()
+				dapui.close()
+			end
 
 			-- -- dap.listeners.after.event_terminated["close_non_project_buffers"] = function()
 			--     local project_dir = vim.fn.getcwd() -- Get the current working directory
@@ -155,25 +194,16 @@ return {
 			)
 			vim.keymap.set(
 				"n",
-				"<Leader>dr",
-				'<Cmd>lua require("dap").repl.open()<CR>',
-				{ noremap = true, silent = true }
-			)
-			vim.keymap.set(
-				"n",
 				"<Leader>dl",
 				'<Cmd>lua require("dap").run_last()<CR>',
 				{ noremap = true, silent = true }
 			)
-			-- vim.keymap.set('n', '<Leader>dc', '<Cmd>lua RunTestAtCursor()<CR>', { noremap = true, silent = true })
 			vim.keymap.set(
 				"n",
 				"<Leader>dt",
 				'<Cmd>lua require("dap").terminate()<CR>',
 				{ noremap = true, silent = true }
 			)
-			vim.keymap.set("n", "<Leader>dc", dapui.close, { noremap = true, silent = true })
-			vim.keymap.set("n", "<Leader>do", dapui.open, { noremap = true, silent = true })
 		end,
 	},
 	{

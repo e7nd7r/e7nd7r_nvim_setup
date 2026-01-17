@@ -43,6 +43,14 @@ return { -- Highlight, edit, and navigate code
 			},
 		},
 	},
+	config = function(_, opts)
+		vim.notify(vim.inspect(vim.g.base46_cache))
+
+		-- dofile(vim.g.base46_cache .. "syntax")
+		require("nvim-treesitter.configs").setup(opts)
+		-- tell treesitter to use the markdown parser for mdx files
+		vim.treesitter.language.register("markdown", "mdx")
+	end,
 	-- There are additional nvim-treesitter modules that you can use to interact
 	-- with nvim-treesitter. You should go explore a few and see what interests you:
 	--

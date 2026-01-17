@@ -98,10 +98,11 @@ return {
 				require("neotest-vim-test")({
 					ignore_file_types = { "python", "vim", "lua" },
 				}),
+				require("rustaceanvim.neotest"),
 			},
 		})
 
-		vim.keymap.set("n", "<leader>td", function()
+		vim.keymap.set("n", "<leader>nt", function()
 			require("neotest").run.run({ strategy = "dap" }) -- Debug nearest test
 		end, { desc = "Debug nearest test" })
 

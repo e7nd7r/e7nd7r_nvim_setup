@@ -243,6 +243,12 @@ return {
 				terraformls = {},
 				ts_ls = {},
 				black = {},
+				terraform = {},
+				bashls = {},
+				shfmt = {},
+				yamlls = {},
+				yamlfmt = {},
+				mdx_analyzer = {},
 			}
 
 			-- Ensure the servers and tools above are installed

@@ -8,9 +8,9 @@ return {
 		-- Update this path
 		local mason_packages_dir = vim.fn.expand("$MASON/packages")
 
-		local extension_path = mason_packages_dir .. "codelldb/extension/"
-		local codelldb_path = extension_path .. "adapter/codelldb"
-		local liblldb_path = extension_path .. "lldb/lib/liblldb.dylib"
+		local extension_path = mason_packages_dir .. "/codelldb/extension/"
+		local codelldb_path = extension_path .. "/adapter/codelldb"
+		local liblldb_path = extension_path .. "/lldb/lib/liblldb.dylib"
 
 		local cfg = require("rustaceanvim.config")
 
